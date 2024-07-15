@@ -1,0 +1,54 @@
+#!/bin/bash
+
+case "$1" in
+    --help)
+        echo "Usage: $0 [OPTION]"
+        echo "Options:"
+        echo "  --help       Display this help message"
+        echo "  --upgrade    Upgrade the application"
+        echo "  --configure  Configure the application"
+        echo "  --about      Display information about the application"
+        exit 0
+        ;;
+    --upgrade)
+        cd ~
+        mkdir -p STTLT_backup
+        cp STTLT/api_key STTLT_backup/
+        rm -rf STTLT
+        git clone https://github.com/SR-Hossain/Speech-To-Text-Live-Transcription.git STTLT
+        cp ~/STTLT_backup/api_key STTLT/
+        rm -rf STTLT_backup
+        cd STTLT
+        pip install -r requirements.txt || pip install -r requirements.txt --break-system-packages || (sudo apt install python3-pip && (pip install -r requirements.txt || pip install -r requirements.txt --break-system-packages))
+        cp start_transcribing /usr/local/bin/
+        echo "Upgrade complete!"
+        exit 0
+        ;;
+    --configure)
+        echo "Configuring the application..."
+        echo "Go to the following URL to get your API key"
+        echo "https://www.assemblyai.com/app/"
+        echo "Enter your API key:"
+        read api_key
+        mkdir -p ~/STTLT
+        echo $api_key > ~/STTLT/api_key
+        echo "Configuration complete!"
+        exit 0
+        ;;
+    --about)
+        echo "Speech To Text Live Transcription"
+        echo "Version 1.0"
+        echo ""
+        echo "Developed by SR Hossain"
+        echo "Syed Sazid Hossain Rezvi"
+        echo "https://github.com/SR-Hossain"
+        echo "https://www.linkedin.com/in/sshrezvi/"
+        exit 0
+        ;;
+    *)
+        echo "Invalid option: $1"
+        ;;
+esac
+
+api_key=$(cat ~/STTLT/api_key)
+python3 ~/STTLT/start_transcribing.py $api_key
