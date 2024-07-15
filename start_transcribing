@@ -20,7 +20,7 @@ case "$1" in
         rm -rf STTLT_backup
         cd STTLT
         pip install -r requirements.txt || pip install -r requirements.txt --break-system-packages || (sudo apt install python3-pip && (pip install -r requirements.txt || pip install -r requirements.txt --break-system-packages))
-        cp start_transcribing /usr/local/bin/
+        sudo cp start_transcribing /usr/local/bin/
         echo "Upgrade complete!"
         exit 0
         ;;
