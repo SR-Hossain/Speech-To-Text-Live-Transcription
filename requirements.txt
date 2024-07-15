@@ -1,4 +1,4 @@
 pyaudio
-speech_recognition
+speechrecognition
 pyautogui
 assemblyai
