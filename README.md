@@ -11,3 +11,6 @@ chmod +x start_transcribing
 ./start_transcribing --upgrade
 start_transcribing --config
 ```
+
+
+It runs on Assembly AI. You will get 3 hours per month for completely free of cost, which is pretty enough for basic usage.
