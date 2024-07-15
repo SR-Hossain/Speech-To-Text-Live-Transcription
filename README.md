@@ -9,4 +9,5 @@ git clone https://github.com/SR-Hossain/Speech-To-Text-Live-Transcription.git ST
 cd STTLT
 chmod +x start_transcribing
 ./start_transcribing --upgrade
+start_transcribing --config
 ```
