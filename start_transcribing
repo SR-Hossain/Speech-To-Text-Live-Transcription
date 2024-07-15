@@ -21,6 +21,7 @@ case "$1" in
         cd STTLT
         pip install -r requirements.txt || pip install -r requirements.txt --break-system-packages || (sudo apt install python3-pip && (pip install -r requirements.txt || pip install -r requirements.txt --break-system-packages))
         sudo cp start_transcribing /usr/local/bin/
+        sudo chmod +x /usr/local/bin/start_transcribing
         echo "Upgrade complete!"
         exit 0
         ;;
@@ -51,4 +52,4 @@ case "$1" in
 esac
 
 api_key=$(cat ~/STTLT/api_key)
-python3 ~/STTLT/start_transcribing.py $api_key
+python3 ~/STTLT/start_transcribing.py $api_key || (echo "Failed to start transcription. Please run '$0 --configure' to configure the application or '$0 --help' for more options." && exit 1)
